@@ -1,0 +1,64 @@
+---
+title: "MilitaryExpenditure"
+author: "Mark Roberts"
+date: "12/6/2019"
+output: html_document
+---
+
+#import data
+```{r}
+Military.Expenditure <- read.csv("~/Desktop/Effervescent Ideas/EffervescentIdeasR/Military Expenditure.csv")
+head(Military.Expenditure)
+```
+
+#eliminate unwanted columns
+```{r}
+Military.Expenditure <- Military.Expenditure[,c(-2,-4)]
+head(Military.Expenditure)
+```
+
+#grab only countries
+```{r}
+Military.Expenditure <- Military.Expenditure[Military.Expenditure$Type=="Country",]
+head(Military.Expenditure)
+
+```
+
+#Eliminating Country Column
+```{r}
+Military.Expenditure <- Military.Expenditure[,-2]
+head(Military.Expenditure)
+```
+
+#Moving country name to rowname
+```{r}
+rownames(Military.Expenditure) <- Military.Expenditure[,1]
+Military.Expenditure <- Military.Expenditure[,-1]
+head(Military.Expenditure)
+```
+
+
+```{r}
+Military.Expenditure <- as.data.frame(t(as.matrix(Military.Expenditure)))
+head(Military.Expenditure)
+```
+
+#fixing rownames
+```{r}
+rownames(Military.Expenditure) <- c(1960:2018)
+head(Military.Expenditure)
+```
+
+#writing new .CSV file
+```{r}
+write.csv(Military.Expenditure, file="MilitaryExpenditureTransposed.csv")
+```
+
+
+```{r}
+Military.Expenditure$`United States`
+Military.Expenditure$`New Zealand`
+
+
+```
+
